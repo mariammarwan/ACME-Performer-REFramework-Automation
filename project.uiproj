@@ -1,0 +1,6 @@
+{
+  "Name": "ACME Performer RE-Framework",
+  "ProjectType": "Process",
+  "Description": "Working on queue and sending an email to the stakeholder",
+  "MainFile": "Main.xaml"
+}

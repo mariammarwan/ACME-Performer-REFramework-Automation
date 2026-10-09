@@ -1,0 +1,30 @@
+# Local UiPath state and caches
+.data/
+.local/
+.entities/
+.objects/
+.screenshots/
+.settings/
+.storage/
+.templates/
+.tmh/
+Exceptions_Screenshots/
+
+# Private configuration and runtime data
+Data/Config.xlsx
+Data/Input/
+Data/Output/
+Data/Temp/
+
+# Generated reports and test data
+Reports/ClientResults.xlsx
+Tests/Tests.xlsx
+
+# Local instructions and editor files
+AGENTS.md
+CLAUDE.md
+Thumbs.db
+.DS_Store
+*.user
+*.tmp
+*.log
