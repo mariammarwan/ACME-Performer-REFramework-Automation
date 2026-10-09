@@ -1,39 +1,94 @@
-### Documentation is included in the Documentation folder ###
+# ACME Performer — UiPath REFramework
+
+A UiPath RPA project that automates the retrieval, processing, and reporting of work items from a UiPath Orchestrator queue using the Robotic Enterprise Framework (REFramework).
+
+## Overview
+
+This project implements the Performer component of an RPA workflow. It retrieves queued transactions from UiPath Orchestrator, collects the transaction data into a DataTable, exports the complete DataTable to an Excel file, and sends the generated report via email.
+
+The project follows the REFramework structure to organize initialization, transaction retrieval, processing, exception handling, and application cleanup. It also uses separate workflows for Chrome, email, Excel, and DataTable operations to keep the automation modular and maintainable.
+
+## Key Features
+* **Queue Integration:** Retrieves transaction items from a designated UiPath Orchestrator queue.
+* **Transaction Processing:** Processes queued items using the REFramework transaction-processing mechanism.
+* **DataTable Management:** Stores and organizes transaction information in a DataTable for structured data handling.
+* **Excel Automation:** Exports the complete DataTable to an Excel workbook for reporting and further analysis.
+* **Email Automation:** Sends the generated Excel report as an email attachment.
+* **Modular Workflow Design:** Separates Chrome, email, Excel, and DataTable operations into dedicated folders and reusable workflows.
+* **REFramework Structure:** Uses framework components to manage initialization, transaction processing, status updates, exception handling, and application cleanup.
+  
+## Workflow Overview
+
+1. **Initialize:** Load configuration settings and prepare the automation environment.
+2. **Retrieve Transactions:** Fetch transaction items from the designated Orchestrator queue.
+3. **Process Transactions:** Read and process the retrieved queue items according to the workflow requirements.
+4. **Build DataTable:** Collect transaction information and organize it into a structured DataTable.
+5. **Export to Excel:** Write the complete DataTable to an Excel file.
+6. **Send Email:** Send an email with the generated Excel report attached.
+7. **Close Applications:** Complete the application cleanup process and finalize execution.
+
+## Project Structure
+
+```text
+ACME Performer REFramework/
+├── Chrome/
+│   └── Chrome-related workflows
+├── Email/
+│   └── Email sending workflows
+├── Excel/
+│   └── Excel report generation workflows
+├── DataTable/
+│   └── DataTable creation and manipulation workflows
+├── Framework/
+│   ├── InitAllApplications.xaml
+│   ├── InitAllSettings.xaml
+│   ├── GetTransactionData.xaml
+│   ├── Process.xaml
+│   ├── SetTransactionStatus.xaml
+│   └── ...
+├── Tests/
+│   └── REFramework test workflows
+├── Main.xaml
+├── project.json
+├── project.uiproj
+└── README.md
+```
 
 
-### REFrameWork Template ###
-**Robotic Enterprise Framework**
+Note: The folder descriptions above are placeholders for the workflows in each folder. Update them with the actual .xaml filenames in your project if you want to document the structure in greater detail.
 
-* Built on top of *Transactional Business Process* template
-* Uses *State Machine* layout for the phases of automation project
-* Offers high level logging, exception handling and recovery
-* Keeps external settings in *Config.xlsx* file and Orchestrator assets
-* Pulls credentials from Orchestrator assets and *Windows Credential Manager*
-* Gets transaction data from Orchestrator queue and updates back status
-* Takes screenshots in case of system exceptions
+## Technologies and Tools
 
+* UiPath Studio
+* UiPath REFramework
+* UiPath Orchestrator
+* UiPath Queues and Transactions
+* DataTable and Data Manipulation
+* Excel Automation
+* Email Automation
+* Configuration-based Workflow Management
+  
+## Prerequisites
 
-### How It Works ###
+To configure and run this project, you need:
 
-1. **INITIALIZE PROCESS**
- + ./Framework/*InitiAllSettings* - Load configuration data from Config.xlsx file and from assets
- + ./Framework/*GetAppCredential* - Retrieve credentials from Orchestrator assets or local Windows Credential Manager
- + ./Framework/*InitiAllApplications* - Open and login to applications used throughout the process
+* UiPath Studio with compatible project dependencies.
+* Access to a UiPath Orchestrator folder containing the designated transaction queue.
+* The required queue items available for processing.
+* A locally configured Data/Config.xlsx workbook, if required by the project's configuration.
+* The necessary permissions and configuration for Excel file creation and email sending.
+* A configured email account or email integration supported by the project's workflows.
 
-2. **GET TRANSACTION DATA**
- + ./Framework/*GetTransactionData* - Fetches transactions from an Orchestrator queue defined by Config("OrchestratorQueueName") or any other configured data source
+Ensure that the queue name, output Excel file path, email settings, and other required values match your local environment before execution.
 
-3. **PROCESS TRANSACTION**
- + *Process* - Process trasaction and invoke other workflows related to the process being automated 
- + ./Framework/*SetTransactionStatus* - Updates the status of the processed transaction (Orchestrator transactions by default): Success, Business Rule Exception or System Exception
+## Security Considerations
 
-4. **END PROCESS**
- + ./Framework/*CloseAllApplications* - Logs out and closes applications used throughout the process
+* Avoid hardcoding email passwords, access tokens, or other sensitive credentials in workflow files.
+* Use secure credential storage and appropriate Orchestrator assets when credentials are required.
+* Do not commit configuration files containing sensitive information or environment-specific secrets.
+* Review generated Excel reports and email recipients to ensure that transaction data is shared only with authorized recipients.
+* Before publishing the project, review workflow files and screenshots for credentials, tokens, personal information, or other sensitive data.
 
+## Project Goal
 
-### For New Project ###
-
-1. Check the Config.xlsx file and add/customize any required fields and values
-2. Implement InitiAllApplications.xaml and CloseAllApplicatoins.xaml workflows, linking them in the Config.xlsx fields
-3. Implement GetTransactionData.xaml and SetTransactionStatus.xaml according to the transaction type being used (Orchestrator queues by default)
-4. Implement Process.xaml workflow and invoke other workflows related to the process being automated
+This project demonstrates practical RPA development skills, including Orchestrator queue integration, transaction processing, structured data management, Excel report generation, email automation, reusable workflow design, and exception handling within the REFramework architecture.
